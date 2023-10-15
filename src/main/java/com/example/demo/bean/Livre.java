@@ -6,17 +6,20 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "Livres")
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@RequiredArgsConstructor
+@Data
 @FieldDefaults(level=AccessLevel.PRIVATE)
 public class Livre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @NonNull
     String isbn;
+    @NonNull
     String titre;
+    @NonNull
     String auteur;
+
+
 }
