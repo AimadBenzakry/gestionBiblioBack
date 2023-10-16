@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,7 +13,12 @@ class GestionDeBiblioApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-	Calculator underTest = new Calculator();
+	private Calculator underTest;
+	@BeforeEach
+	public void  setup(){
+		underTest = new Calculator();
+	}
+
 	@Test
 	void itShouldAddTwoNumbers() {
 		//given
@@ -27,9 +34,30 @@ class GestionDeBiblioApplicationTests {
 
 	}
 
+	@Test
+	void testIntegration() {
+		//given
+		int a = 2;
+		int b = 3;
+		int c = 10;
+
+		//when
+		int result = underTest.multiply(underTest.add(a,b), c);
+
+		//then
+		int expected = 50;
+		assertThat(result).isEqualTo(expected);
+
+	}
+
+
+
 	class Calculator {
 		int add(int a,int b){
 				return a+b;
+		}
+		int multiply(int a, int b){
+			return a*b;
 		}
 	}
 

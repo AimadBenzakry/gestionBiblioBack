@@ -24,24 +24,23 @@ public class LivresList {
         driver.manage().window().maximize();
     }
 
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
+//    @AfterEach
+//    public void tearDown() {
+//        driver.quit();
+//    }
 
     @Test
     public void testGetListOfLivres() {
-        // Open the webpage
+
         driver.get("http://localhost:3000");
 
         WebElement tbody = driver.findElement(By.tagName("tbody"));
 
-        // Get all rows in the table
         List<WebElement> rows = tbody.findElements(By.tagName("tr"));
 
-        System.out.println(rows.size()==4);
+//        System.out.println(rows.size()==4);
 
-        // Verify if the list has at least one livre
+        // Verifier le nombre de lignes de la table
         assertTrue(rows.size() == 4); // Assuming there's a header row
 
     }

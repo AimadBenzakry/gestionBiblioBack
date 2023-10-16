@@ -24,8 +24,8 @@ class LivreDaoTest {
         Livre expected = this.underTest.findByIsbn(livre.getIsbn());
         //Then
         assertThat(expected).isNotEqualTo(null);
-        assertThat(expected.getTitre()).isEqualTo(livre.getTitre());
-        assertThat(expected.getAuteur()).isEqualTo(livre.getAuteur());
+        assertThat(expected).isEqualTo(livre);
+//        assertThat(expected.getAuteur()).isEqualTo(livre.getAuteur());
     }
 
     @Test

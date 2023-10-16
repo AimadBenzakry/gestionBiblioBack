@@ -36,7 +36,7 @@ class LivreControllerTest {
 
     private static HttpHeaders headers;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @BeforeAll
     public static void init() {
         headers = new HttpHeaders();
@@ -50,13 +50,16 @@ class LivreControllerTest {
     @Sql(statements = "INSERT INTO livres(id, isbn, titre, auteur) VALUES (50, 'aaa', 'titre50', 'auteur50')", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(statements = "DELETE FROM livres WHERE id='50'", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void getAllLivres() {
+        //given
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        //when
         ResponseEntity<List<Livre>> response = restTemplate.exchange(
                 createURLWithPort().concat("/getAll"), HttpMethod.GET, entity, new ParameterizedTypeReference<List<Livre>>(){});
-        List<Livre> orderList = response.getBody();
-        assert orderList != null;
+        List<Livre> livresList = response.getBody();
+        //then
+        assert  livresList!= null;
         assertEquals(response.getStatusCodeValue(), 200);
-        assertEquals(orderList.size(), livreDao.findAll().size());
+        assertEquals(livresList.size(), livreDao.findAll().size());
 
     }
 
